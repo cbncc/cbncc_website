@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>_CBNCC_ - Coding Club</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* WhatsApp Section Styles */
+        .whatsapp-section {
+            padding: 80px 10%;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18Z" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        .whatsapp-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-content {
+            text-align: center;
+        }
+
+        .whatsapp-header {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .whatsapp-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #25D366;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .whatsapp-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-family: "Playfair Display", serif;
+            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+
+        .whatsapp-header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+
+        .whatsapp-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin: 50px 0;
+            align-items: center;
+        }
+
+        .whatsapp-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .whatsapp-sidebar {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .community-stats {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .stat-item strong {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #ffffff;
+            font-family: "Playfair Display", serif;
+        }
+
+        .whatsapp-join {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
+            border: 2px solid transparent;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            background: #128C7E;
+        }
+
+        .whatsapp-button i {
+            font-size: 1.5rem;
+        }
+
+        .whatsapp-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            max-width: 500px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .community-guidelines {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .community-guidelines h4 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-family: "Playfair Display", serif;
+        }
+
+        .guidelines-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .guidelines-list li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .guidelines-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #25D366;
+        }
+
+        @media (max-width: 1024px) {
+            .whatsapp-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-sidebar {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-section {
+                padding: 60px 5%;
+            }
+
+            .whatsapp-header h2 {
+                font-size: 2rem;
+            }
+
+            .whatsapp-features {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .qr-code {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    
+
+    <div class="scroll-progress">
+      <div class="scroll-progress-bar"></div>
+    </div>
+
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+    </div>
+
+    <div class="toast-container"></div>
+
+    <header>
+      <div><strong class="logo-text">CBNCC</strong></div>
+      <nav>
+        <a href="achievements.html">Gallery</a>
+        <a href="write-blog.html">Write Blog</a>
+        <a href="competitions.html">Competitions</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="cube-container">
+        <div class="cube">
+          <div class="face front"><span>WEB DEVELOPMENT</span></div>
+          <div class="face back"><span>APP DEVELOPMENT</span></div>
+          <div class="face right"><span>COMPETITIVE PROGRAMMING</span></div>
+          <div class="face left"><span>MACHINE LEARNING AND AI</span></div>
+          <div class="face top"><span>EVENTS AND HACKATHONS</span></div>
+          <div class="face bottom"><span>OPEN SOURCE AND GITHUB</span></div>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <h2>EMPOWERING STUDENTS THROUGH CODE</h2>
+        <h1 class="logo-text">CBNCC</h1>
+        <p>THE OFFICIAL CODING CLUB OF NETAJI SUBHASH UNIVERSITY</p>
+        <h2>
+          JOIN A VIBRANT COMMUNITY OF TECH ENTHUSIASTS, PROBLEM SOLVERS, AND
+          FUTURE INNOVATORS
+        </h2>
+        <h3>BUILD. COLLABORATE. GROW</h3>
+        <button class="btn-primary">Join the Community <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="integration-section">
+      <div class="container">
+        <div class="left-column">
+          <h4 class="small-heading">Why Join CBNCC?</h4>
+          <h1 class="main-heading">
+            Empowering Students Through Code & Community
+          </h1>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <h3>50+</h3>
+              <p>Active Members</p>
+            </div>
+            <div class="stat-box">
+              <h3>5+</h3>
+              <p>Projects Completed</p>
+            </div>
+            <div class="stat-box">
+              <h3>100+</h3>
+              <p>Workshop Hours</p>
+            </div>
+            <div class="stat-box">
+              <h3>24/7</h3>
+              <p>Community Support</p>
+            </div>
+          </div>
+        </div>
+        <div class="right-column">
+          <p class="intro-text">
+            At CBNCC, we believe in learning by doing. Our community-driven approach
+            combines hands-on coding experience with mentorship from industry experts
+            and peers.
+          </p>
+          <div class="features-grid">
+            <div class="feature-item">
+              <h4>Hands-on Learning</h4>
+              <p>
+                Participate in coding workshops, hackathons, and real-world projects
+                to gain practical experience.
+              </p>
+            </div>
+            <div class="feature-item">
+              <h4>Peer Learning</h4>
+              <p>
+                Connect with fellow coders, share knowledge, and grow together in
+                our supportive community.
+              </p>
+            </div>
+            <div class="feature-item">
+              <h4>Industry Connect</h4>
+              <p>
+                Regular sessions with industry experts, tech talks, and networking
+                opportunities with professionals.
+              </p>
+            </div>
+            <div class="feature-item">
+              <h4>Career Growth</h4>
+              <p>
+                Get guidance on internships, placements, and building a strong
+                portfolio for your tech career.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-section">
+      <div class="blog-header">
+        <h2>Latest from Our Blog</h2>
+        <p>
+          Stay updated with the latest trends, tutorials, and insights from our
+          coding community.
+        </p>
+
+        <div class="blog-categories">
+          <button class="category-btn active" data-category="all">
+            All Posts
+          </button>
+          <button class="category-btn" data-category="ai-ml">AI & ML</button>
+          <button class="category-btn" data-category="web-dev">
+            Web Development
+          </button>
+          <button class="category-btn" data-category="open-source">
+            Open Source
+          </button>
+        </div>
+      </div>
+
+      <div class="blog-grid">
+        <!-- AI & ML Posts -->
+        <article class="blog-card" data-category="ai-ml">
+          <div class="glass"></div>
+          <div class="logo">
+            <span class="circle circle1"></span>
+            <span class="circle circle2"></span>
+            <span class="circle circle3"></span>
+            <span class="circle circle4"></span>
+            <span class="circle circle5">🤖</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">AI & ML</span>
+            <h3 class="blog-title">
+              Introduction to Neural Networks with PyTorch
+            </h3>
+            <p class="blog-excerpt">
+              A beginner's guide to understanding and implementing neural
+              networks using PyTorch framework.
+            </p>
+            <div class="blog-footer">
+              <div class="author-info">
+            
+              
+              </div>
+              <a href="https://medium.com/@sahin.samia/train-a-neural-network-in-pytorch-a-complete-beginners-walkthrough-3897d18d6078" class="blog-link">Read More →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="ai-ml">
+          <div class="glass"></div>
+          <div class="logo">
+            <span class="circle circle1"></span>
+            <span class="circle circle2"></span>
+            <span class="circle circle3"></span>
+            <span class="circle circle4"></span>
+            <span class="circle circle5">🧠</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">AI & ML</span>
+            <h3 class="blog-title">Deep Learning for Computer Vision</h3>
+            <p class="blog-excerpt">
+              Exploring CNN architectures and their applications in image
+              recognition tasks.
+            </p>
+            <div class="blog-footer">
+              <div class="author-info">
+              
+                <span class="author-name"></span>
+              </div>
+              <a href="https://opencv.org/blog/deep-learning-with-computer-vision/" class="blog-link">Learn More →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Web Development Posts -->
+        <article class="blog-card" data-category="web-dev">
+          <div class="glass"></div>
+          <div class="logo">
+            <span class="circle circle1"></span>
+            <span class="circle circle2"></span>
+            <span class="circle circle3"></span>
+            <span class="circle circle4"></span>
+            <span class="circle circle5">🌐</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">Web Development</span>
+            <h3 class="blog-title">Modern CSS Techniques for Better Layouts</h3>
+            <p class="blog-excerpt">
+              Discover the power of CSS Grid, Flexbox, and modern layout
+              techniques.
+            </p>
+            <div class="blog-footer">
+              <div class="author-info">
+              
+                <span class="author-name">Lisa Chen</span>
+              </div>
+              <a href="blog-post.html?id=modern-css" class="blog-link">Explore →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="web-dev">
+          <div class="glass"></div>
+          <div class="logo">
+            <span class="circle circle1"></span>
+            <span class="circle circle2"></span>
+            <span class="circle circle3"></span>
+            <span class="circle circle4"></span>
+            <span class="circle circle5">⚛️</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">Web Development</span>
+            <h3 class="blog-title">React.js Best Practices 2024</h3>
+            <p class="blog-excerpt">
+              Learn the latest patterns and practices for building scalable
+              React applications.
+            </p>
+            <div class="blog-footer">
+              <div class="author-info">
+           
+              </div>
+              <a href="blog-post.html?id=react-best-practices" class="blog-link">Read More →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Open Source Posts -->
+        <article class="blog-card" data-category="open-source">
+          <div class="glass"></div>
+          <div class="logo">
+            <span class="circle circle1"></span>
+            <span class="circle circle2"></span>
+            <span class="circle circle3"></span>
+            <span class="circle circle4"></span>
+            <span class="circle circle5">🔗</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">Open Source</span>
+            <h3 class="blog-title">Contributing to Open Source Projects</h3>
+            <p class="blog-excerpt">
+              A comprehensive guide to making your first open source
+              contribution.
+            </p>
+            <div class="blog-footer">
+              <div class="author-info">
+            
+               
+              </div>
+              <a href="blog-post.html?id=open-source-contribution" class="blog-link">Learn More →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="open-source">
+          <div class="glass"></div>
+          <div class="logo">
+            <span class="circle circle1"></span>
+            <span class="circle circle2"></span>
+            <span class="circle circle3"></span>
+            <span class="circle circle4"></span>
+            <span class="circle circle5">🚀</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">Open Source</span>
+            <h3 class="blog-title">Building a Community Around Your Project</h3>
+            <p class="blog-excerpt">
+              Tips and strategies for growing and maintaining an open source
+              community.
+            </p>
+            <div class="blog-footer">
+            
+              </div>
+              <a href="blog-post.html?id=open-source-community" class="blog-link">Discover →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="founding-members">
+      <div class="section-header">
+        <h2>Our Founding Members</h2>
+        <p>
+          Meet the visionaries who established CBNCC and laid the foundation for
+          our thriving community.
+        </p>
+      </div>
+
+      <div class="wrapper">
+        <div class="inner" style="--quantity: 10">
+          <div class="card" style="--index: 0; --color-card: 0, 0, 0">
+            <div class="img" style="background-image: url('./images/WhatsApp Image 2025-05-23 at 3.40.33 PM.jpeg'); background-size: cover; background-position: center;">
+              <div class="member-info">
+                <h3>Utkarsh Kumar</h3>
+                <p>Co-founder & Tech Lead</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 1; --color-card: 0, 0, 0">
+            <div class="img" style="background-image: url('./images/WhatsApp\ Image\ 2025-05-23\ at\ 4.08.08\ PM.jpeg'); background-size: cover; background-position: center;">
+              <div class="member-info" style="background: rgba(0, 0, 0, 0.7); padding: 15px; border-radius: 10px; backdrop-filter: blur(5px); width: 100%;">
+                <h3>Shailesh Singh</h3>
+                <p>Vice President</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 2; --color-card: 0, 0, 0">
+            <div class="img" style="background-image: url('./images/WhatsApp\ Image\ 2025-05-23\ at\ 4.32.27\ PM.jpeg'); background-size: cover; background-position: center;">
+              <div class="member-info" style="background: rgba(0, 0, 0, 0.7); padding: 15px; border-radius: 10px; backdrop-filter: blur(5px); width: 100%;">
+                <h3>Abhishek Kumar</h3>
+                <p>Treasurer</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 3; --color-card: 0, 0, 0">
+            <div class="img" style="background-image: url('./images/shlok-kumar-singh.jpeg'); background-size: cover; background-position: center;">
+              <div class="member-info">
+                <h3>Shlok Kumar Singh</h3>
+                <p>President</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 4; --color-card: 60, 60, 60">
+            <div class="img" style="background: linear-gradient(45deg, rgba(60, 60, 60, 0.7), rgba(60, 60, 60, 0.9));">
+              <div class="member-info">
+                <h3></h3>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 5; --color-card: 80, 80, 80">
+            <div class="img" style="background: linear-gradient(45deg, rgba(80, 80, 80, 0.7), rgba(80, 80, 80, 0.9));">
+              <div class="member-info">
+                <h3></h3>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 6; --color-card: 100, 100, 100">
+            <div class="img" style="background: linear-gradient(45deg, rgba(100, 100, 100, 0.7), rgba(100, 100, 100, 0.9));">
+              <div class="member-info">
+                <h3></h3>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 7; --color-card: 120, 120, 120">
+            <div class="img" style="background: linear-gradient(45deg, rgba(120, 120, 120, 0.7), rgba(120, 120, 120, 0.9));">
+              <div class="member-info">
+                <h3></h3>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 8; --color-card: 140, 140, 140">
+            <div class="img" style="background: linear-gradient(45deg, rgba(140, 140, 140, 0.7), rgba(140, 140, 140, 0.9));">
+              <div class="member-info">
+                <h3></h3>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="--index: 9; --color-card: 160, 160, 160">
+            <div class="img" style="background: linear-gradient(45deg, rgba(160, 160, 160, 0.7), rgba(160, 160, 160, 0.9));">
+              <div class="member-info">
+                <h3></h3>
+                <p></p>
+      
+              </div>
+            </div>
+          </div>
+        
+    </section>
+
+    <section class="join-section">
+      <div class="join-container">
+        <div class="join-content">
+          <h2>Join Our Coding Community</h2>
+          <p>
+            Take the first step towards becoming a part of CBNCC. Join a community
+            of passionate developers, learn from experts, and build amazing
+            projects together.
+          </p>
+          <ul class="benefits-list">
+            <li class="benefit-item">
+              <div class="benefit-icon">💻</div>
+              <div class="benefit-text">
+                <h4>Access to Resources</h4>
+                <p>Get exclusive access to learning materials, workshops, and coding resources.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">🤝</div>
+              <div class="benefit-text">
+                <h4>Mentorship Program</h4>
+                <p>Connect with experienced developers and get personalized guidance.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">🚀</div>
+              <div class="benefit-text">
+                <h4>Project Opportunities</h4>
+                <p>Work on real projects and build a strong portfolio.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">🎯</div>
+              <div class="benefit-text">
+                <h4>Career Support</h4>
+                <p>Get help with internships, job placements, and career development.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="join-form">
+          <form id="membershipForm">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label for="year">Year of Study</label>
+              <select id="year" name="year" required>
+                <option value="">Select your year</option>
+                <option value="1">First Year</option>
+                <option value="2">Second Year</option>
+                <option value="3">Third Year</option>
+                <option value="4">Fourth Year</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="interests">Areas of Interest</label>
+              <select id="interests" name="interests" required>
+                <option value="">Select your primary interest</option>
+                <option value="web">Web Development</option>
+                <option value="app">App Development</option>
+                <option value="ai">AI & Machine Learning</option>
+                <option value="cp">Competitive Programming</option>
+                <option value="opensource">Open Source</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Why do you want to join?</label>
+              <textarea id="message" name="message" required placeholder="Tell us about your motivation to join CBNCC"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit Application</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section" id="profileSection" style="display: none;">
+      <div class="container">
+        <div class="profile-header">
+          <h2>Community Member Profile</h2>
+          <p>Your CBCC community membership details</p>
+        </div>
+        <div class="profile-content">
+          <div class="profile-card">
+            <div class="profile-info">
+              <h3 id="profileName"></h3>
+              <p class="profile-email" id="profileEmail"></p>
+              <div class="profile-details">
+                <div class="detail-item">
+                  <span class="label">Year of Study:</span>
+                  <span class="value" id="profileYear"></span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">Interests:</span>
+                  <span class="value" id="profileInterests"></span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">Status:</span>
+                  <span class="value" id="profileStatus"></span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">Joined:</span>
+                  <span class="value" id="profileJoinDate"></span>
+                </div>
+              </div>
+              <div class="profile-message">
+                <h4>About Me</h4>
+                <p id="profileMessage"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Community Section -->
+    <section class="whatsapp-section">
+        <div class="whatsapp-container">
+            <div class="whatsapp-content">
+                <div class="whatsapp-header">
+                    <div class="whatsapp-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h2>Join Our WhatsApp Community</h2>
+                    <p>Connect with 500+ developers, get instant updates, and be part of our growing tech community at Netaji Subhash University</p>
+                </div>
+                
+                <div class="whatsapp-grid">
+                    <div class="whatsapp-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">💬</div>
+                            <h3>Real-time Updates</h3>
+                            <p>Get instant notifications about workshops, events, hackathons, and internship opportunities</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">👥</div>
+                            <h3>Community Support</h3>
+                            <p>Connect with peers, ask questions, share your knowledge, and collaborate on projects</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Exclusive Content</h3>
+                            <p>Access to study materials, coding resources, project ideas, and interview preparation guides</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🤝</div>
+                            <h3>Networking</h3>
+                            <p>Connect with seniors, alumni, and industry professionals for mentorship and career guidance</p>
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-sidebar">
+                        <h3>Quick Join</h3>
+                        <div class="qr-code">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://chat.whatsapp.com/IWMM4DQIeEsAZeyQ8nQgsF" alt="WhatsApp QR Code">
+                        </div>
+                        <p>Scan QR code to join instantly</p>
+                        
+                        <div class="community-stats">
+                            <div class="stat-item">
+                                <strong>500+</strong>
+                                Active Members
+                            </div>
+                            <div class="stat-item">
+                                <strong>24/7</strong>
+                                Community Support
+                            </div>
+                            <div class="stat-item">
+                                <strong>50+</strong>
+                                Daily Messages
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="community-guidelines">
+                    <h4>Community Guidelines</h4>
+                    <ul class="guidelines-list">
+                        <li>Be respectful and professional in all communications</li>
+                        <li>Share relevant and helpful content only</li>
+                        <li>No spam or promotional content without permission</li>
+                        <li>Keep discussions focused on tech and learning</li>
+                        <li>Help others and contribute to the community</li>
+                    </ul>
+                </div>
+
+                <div class="whatsapp-join">
+                    <a href="https://chat.whatsapp.com/IWMM4DQIeEsAZeyQ8nQgsF" target="_blank" class="whatsapp-button">
+                        <i class="fab fa-whatsapp"></i>
+                        Join WhatsApp Community
+                    </a>
+                    <p class="whatsapp-note">* By joining, you agree to follow our community guidelines. The group is moderated to ensure a positive learning environment for all members.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3 class="logo-text">CBNCC</h3>
+          <p>
+            Empowering students through code, community, and innovation. Join us in
+            shaping the future of technology at Netaji Subhash University.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link"><span>𝕏</span></a>
+            <a href="#" class="social-link"><span>in</span></a>
+            <a href="#" class="social-link"><span>f</span></a>
+            <a href="https://github.com/account" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Our Team</a>
+            <a href="#">Projects</a>
+            <a href="#">Events</a>
+            <a href="#">Blog</a>
+          </div>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <div class="footer-links">
+            <a href="#">Learning Paths</a>
+            <a href="#">Workshops</a>
+            <a href="#">Documentation</a>
+            <a href="#">GitHub Repos</a>
+            <a href="#">Code Labs</a>
+          </div>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <div class="footer-links">
+            <a href="#">Join Discord</a>
+            <a href="#">Email Us</a>
+            <a href="#">Report Issue</a>
+            <a href="#">Feedback</a>
+            <a href="#">Support</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2024 CBNCC. All rights reserved. Made with ❤️ by students, for students.
+      </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">↑</button>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="auth-container">
+      <div class="auth-form">
+        <div class="profile-header">
+          <h2>Your Profile</h2>
+          <button type="button" class="close-btn" onclick="hideModal('profileModal')">&times;</button>
+        </div>
+        <div class="profile-info">
+          <div class="info-card">
+            <h3>Full Name</h3>
+            <p id="profileName"></p>
+          </div>
+          <div class="info-card">
+            <h3>Email</h3>
+            <p id="profileEmail"></p>
+          </div>
+          <div class="info-card">
+            <h3>Year of Study</h3>
+            <p id="profileYear"></p>
+          </div>
+          <div class="info-card">
+            <h3>Area of Interest</h3>
+            <p id="profileInterest"></p>
+          </div>
+          <div class="info-card" style="grid-column: 1 / -1;">
+            <h3>Motivation</h3>
+            <p id="profileMotivation"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
