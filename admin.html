@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBCC Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .application-table {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .action-buttons button {
+            margin: 0 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">CBCC Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admin.html">Admin Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <h1 class="mb-4">Admin Dashboard</h1>
+        <div class="card application-table">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Year</th>
+                                <th>Interests</th>
+                                <th>Message</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsTable">
+                            <!-- Applications will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Check if user is admin
+        async function checkAdmin() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/verify', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                
+                if (!data.user.isAdmin) {
+                    alert('Access denied. Admin privileges required.');
+                    window.location.href = 'index.html';
+                }
+            } catch (error) {
+                console.error('Error verifying admin status:', error);
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Load applications
+        async function loadApplications() {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch('http://localhost:5000/api/admin/applications', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const applications = await response.json();
+                
+                const tableBody = document.getElementById('applicationsTable');
+                tableBody.innerHTML = applications.map(app => `
+                    <tr>
+                        <td>${app.name}</td>
+                        <td>${app.email}</td>
+                        <td>${app.yearOfStudy}</td>
+                        <td>${app.interests.join(', ')}</td>
+                        <td>${app.message}</td>
+                        <td>
+                            <span class="status-badge status-${app.status || 'pending'}">
+                                ${(app.status || 'pending').toUpperCase()}
+                            </span>
+                        </td>
+                        <td class="action-buttons">
+                            <button class="btn btn-success btn-sm" onclick="updateStatus('${app._id}', 'approved')">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="updateStatus('${app._id}', 'rejected')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteApplication('${app._id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading applications:', error);
+                alert('Error loading applications');
+            }
+        }
+
+        // Update application status
+        async function updateStatus(id, status) {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`http://localhost:5000/api/admin/applications/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status })
+                });
+                
+                if (response.ok) {
+                    loadApplications();
+                } else {
+                    throw new Error('Failed to update status');
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+                alert('Error updating application status');
+            }
+        }
+
+        // Delete application
+        async function deleteApplication(id) {
+            if (!confirm('Are you sure you want to delete this application?')) {
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`http://localhost:5000/api/admin/applications/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    loadApplications();
+                } else {
+                    throw new Error('Failed to delete application');
+                }
+            } catch (error) {
+                console.error('Error deleting application:', error);
+                alert('Error deleting application');
+            }
+        }
+
+        // Logout handler
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
+        });
+
+        // Initialize
+        checkAdmin();
+        loadApplications();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Competitions & Hackathons - CBNCC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .competitions-page {
+            min-height: 100vh;
+            padding: 120px 10% 80px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .competitions-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .competitions-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #000;
+            font-family: "Playfair Display", serif;
+        }
+
+        .competitions-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .competitions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .competition-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .competition-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .competition-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .competition-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+        }
+
+        .competition-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .status-upcoming {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-ongoing {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-past {
+            background: #f5f5f5;
+            color: #616161;
+        }
+
+        .competition-content {
+            padding: 25px;
+        }
+
+        .competition-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .competition-date i {
+            color: #128C7E;
+        }
+
+        .competition-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+            line-height: 1.4;
+        }
+
+        .competition-description {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .competition-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .detail-item i {
+            color: #128C7E;
+        }
+
+        .competition-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .competition-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .primary-button {
+            background: #128C7E;
+            color: white;
+        }
+
+        .secondary-button {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filters-section {
+            margin-bottom: 40px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-button {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #128C7E;
+            background: transparent;
+            color: #128C7E;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button.active {
+            background: #128C7E;
+            color: white;
+        }
+
+        .filter-button:hover {
+            background: #128C7E;
+            color: white;
+        }
+
+        .calendar-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .calendar-header h2 {
+            font-size: 1.8rem;
+            color: #000;
+            font-family: "Playfair Display", serif;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .calendar-nav button {
+            background: #f0f0f0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav button:hover {
+            background: #128C7E;
+            color: white;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-day.has-event {
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .calendar-day:hover {
+            background: #128C7E;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .competitions-page {
+                padding: 100px 5% 60px;
+            }
+
+            .competitions-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .competition-actions {
+                flex-direction: column;
+            }
+
+            .calendar-grid {
+                gap: 5px;
+            }
+
+            .calendar-day {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="toast-container"></div>
+
+    <header>
+        <div><strong class="logo-text">CBNCC</strong></div>
+        <nav>
+            <a href="index123.html">Home</a>
+            <a href="achievements.html">Gallery</a>
+            <a href="write-blog.html">Write Blog</a>
+            <a href="competitions.html" class="active">Competitions</a>
+            <a href="#" id="loginBtn">Login</a>
+            <a href="#" id="registerBtn">Register</a>
+            <a href="profile.html" id="profileBtn" style="display: none;">My Profile</a>
+            <a href="#" id="logoutBtn" style="display: none;">Logout</a>
+        </nav>
+    </header>
+
+    <main class="competitions-page">
+        <div class="competitions-header">
+            <h1>Competitions & Hackathons</h1>
+            <p>Stay updated with the latest coding competitions, hackathons, and tech challenges. Join these events to showcase your skills, learn from others, and win exciting prizes.</p>
+        </div>
+
+        <div class="filters-section">
+            <button class="filter-button active" data-filter="all">All Events</button>
+            <button class="filter-button" data-filter="hackathon">Hackathons</button>
+            <button class="filter-button" data-filter="coding">Coding Contests</button>
+            <button class="filter-button" data-filter="workshop">Workshops</button>
+            <button class="filter-button" data-filter="webinar">Webinars</button>
+        </div>
+
+        <div class="calendar-section">
+            <div class="calendar-header">
+                <h2>Event Calendar</h2>
+                <div class="calendar-nav">
+                    <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="competitions-grid">
+            <!-- Upcoming Hackathon -->
+            <article class="competition-card">
+                <div class="competition-image" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <span class="competition-status status-upcoming">Upcoming</span>
+                </div>
+                <div class="competition-content">
+                    <div class="competition-date">
+                        <i class="far fa-calendar"></i>
+                        COMING SOON
+                    </div>
+                    <h3 class="competition-title">CBNCC Annual Hackathon 2024</h3>
+                    <p class="competition-description">A 24-hour hackathon where students will build innovative solutions for real-world problems using cutting-edge technologies.</p>
+                    <div class="competition-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Netaji Subhash University</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <span>Team of 2-4</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>₹50,000 Prize Pool</span>
+                        </div>
+                    </div>
+                    <div class="competition-tags">
+                        <span class="tag">Web Development</span>
+                        <span class="tag">AI/ML</span>
+                        <span class="tag">Mobile Apps</span>
+                    </div>
+                    <div class="competition-actions">
+                        <a href="#" class="action-button primary-button">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Register Now
+                        </a>
+                        <a href="#" class="action-button secondary-button">
+                            <i class="fas fa-info-circle"></i>
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Ongoing Competition -->
+            <article class="competition-card">
+                <div class="competition-image" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <span class="competition-status status-ongoing">UPCOMING</span>
+                </div>
+                <div class="competition-content">
+                    <div class="competition-date">
+                        <i class="far fa-calendar"></i>
+                        COMING SOON
+                    </div>
+                    <h3 class="competition-title">CodeQuest 2024</h3>
+                    <p class="competition-description">A three-week competitive programming challenge with daily coding problems and weekly leaderboard updates.</p>
+                    <div class="competition-details">
+                        <div class="detail-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>Online</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-user"></i>
+                            <span>Individual</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>₹25,000 Prize Pool</span>
+                        </div>
+                    </div>
+                    <div class="competition-tags">
+                        <span class="tag">Competitive Programming</span>
+                        <span class="tag">Algorithms</span>
+                        <span class="tag">Data Structures</span>
+                    </div>
+                    <div class="competition-actions">
+                        <a href="#" class="action-button primary-button">
+                            <i class="fas fa-play"></i>
+                            Start Coding
+                        </a>
+                        <a href="#" class="action-button secondary-button">
+                            <i class="fas fa-list"></i>
+                            View Problems
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Past Event -->
+            <article class="competition-card">
+                <div class="competition-image" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <span class="competition-status status-past">UPCOMING </span>
+                </div>
+                <div class="competition-content">
+                    <div class="competition-date">
+                        <i class="far fa-calendar"></i>
+                        COMING SOON
+                    </div>
+                    <h3 class="competition-title">Web Development Workshop</h3>
+                    <p class="competition-description">A hands-on workshop covering modern web development technologies, best practices, and real-world project building.</p>
+                    <div class="competition-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Room 302, CS Department</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <span>50 Participants</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>4 Hours</span>
+                        </div>
+                    </div>
+                    <div class="competition-tags">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">React.js</span>
+                    </div>
+                    <div class="competition-actions">
+                        <a href="#" class="action-button primary-button">
+                            <i class="fas fa-download"></i>
+                            Resources
+                        </a>
+                        <a href="#" class="action-button secondary-button">
+                            <i class="fas fa-photo-video"></i>
+                            Gallery
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="logo-text">CBNCC</h3>
+                <p>Empowering students through code, community, and innovation.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><span>𝕏</span></a>
+                    <a href="#" class="social-link"><span>in</span></a>
+                    <a href="#" class="social-link"><span>f</span></a>
+                    <a href="#" class="social-link"><span>git</span></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Our Team</a>
+                    <a href="#">Projects</a>
+                    <a href="#">Events</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <div class="footer-links">
+                    <a href="#">Learning Paths</a>
+                    <a href="#">Workshops</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">GitHub Repos</a>
+                    <a href="#">Code Labs</a>
+                </div>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <div class="footer-links">
+                    <a href="#">Join Discord</a>
+                    <a href="#">Email Us</a>
+                    <a href="#">Report Issue</a>
+                    <a href="#">Feedback</a>
+                    <a href="#">Support</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 CBNCC. All rights reserved. Made with ❤️ by students, for students.
+        </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">↑</button>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const competitionCards = document.querySelectorAll('.competition-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+                
+                competitionCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Calendar functionality
+        function generateCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentYear = today.getFullYear();
+            
+            // Clear existing calendar
+            calendarGrid.innerHTML = '';
+            
+            // Add day headers
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            days.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day';
+                dayHeader.textContent = day;
+                calendarGrid.appendChild(dayHeader);
+            });
+            
+            // Get first day of month
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            // Get last day of month
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            
+            // Add empty cells for days before first day of month
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // Add days of month
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                // Add has-event class to days with events (example: 15th and 20th)
+                if (day === 15 || day === 20) {
+                    dayElement.classList.add('has-event');
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        // Initialize calendar
+        generateCalendar();
+
+        // Month navigation
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            // Add month navigation logic
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            // Add month navigation logic
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html> 

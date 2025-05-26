@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Achievements & Gallery - CBNCC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .achievements-page {
+            min-height: 100vh;
+            padding: 120px 10%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .achievements-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .achievements-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .achievements-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #000;
+            font-family: "Playfair Display", serif;
+        }
+
+        .achievements-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid #000;
+            border-radius: 25px;
+            background: transparent;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: #fff;
+        }
+
+        .gallery-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .gallery-caption p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            max-width: 1000px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-caption {
+            color: #fff;
+            text-align: center;
+        }
+
+        .modal-caption h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-caption p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .achievements-page {
+                padding: 100px 5%;
+            }
+
+            .achievements-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .modal {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="toast-container"></div>
+
+    <header>
+        <div><strong class="logo-text">CBNCC</strong></div>
+        <nav>
+            <a href="index123.html">Home</a>
+            <a href="#" id="loginBtn">Login</a>
+            <a href="#" id="registerBtn">Register</a>
+            <a href="#" id="logoutBtn" style="display: none;">Logout</a>
+        </nav>
+    </header>
+
+    <main class="achievements-page">
+        <div class="achievements-container">
+            <div class="achievements-header">
+                <h1>Our Achievements & Gallery</h1>
+                <p>Explore the moments that define our community's journey, from hackathons to workshops and everything in between.</p>
+            </div>
+
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="events">Events</button>
+                <button class="filter-btn" data-filter="workshops">Workshops</button>
+                <button class="filter-btn" data-filter="hackathons">Hackathons</button>
+                <button class="filter-btn" data-filter="community">Community</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for enlarged images -->
+    <div class="modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <div class="modal-content">
+            <img src="" alt="" class="modal-image" id="modalImage">
+            <div class="modal-caption">
+                <h2 id="modalTitle"></h2>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="logo-text">CBNCC</h3>
+                <p>Empowering students through code, community, and innovation.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><span>𝕏</span></a>
+                    <a href="#" class="social-link"><span>in</span></a>
+                    <a href="#" class="social-link"><span>f</span></a>
+                    <a href="#" class="social-link"><span>git</span></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Our Team</a>
+                    <a href="#">Projects</a>
+                    <a href="#">Events</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <div class="footer-links">
+                    <a href="#">Learning Paths</a>
+                    <a href="#">Workshops</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">GitHub Repos</a>
+                    <a href="#">Code Labs</a>
+                </div>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <div class="footer-links">
+                    <a href="#">Join Discord</a>
+                    <a href="#">Email Us</a>
+                    <a href="#">Report Issue</a>
+                    <a href="#">Feedback</a>
+                    <a href="#">Support</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 CBNCC. All rights reserved. Made with ❤️ by students, for students.
+        </div>
+    </footer>
+
+    <script>
+        // Sample gallery data - Replace with actual data from your backend
+        const galleryData = [
+            {
+                id: 101,
+                title: "Hackathon Moment 1",
+                description: "Captured during our annual hackathon.",
+                image: "images/hackathon/WhatsApp Image 2025-05-11 at 3.27.31 PM (1).jpeg",
+                category: "hackathons"
+            },
+            {
+                id: 102,
+                title: "Hackathon Moment 2",
+                description: "Teamwork in action.",
+                image: "images/hackathon/WhatsApp Image 2025-05-11 at 3.27.31 PM.jpeg",
+                category: "hackathons"
+            },
+            {
+                id: 103,
+                title: "Hackathon Moment 3",
+                description: "Late night coding session.",
+                image: "images/hackathon/WhatsApp Image 2025-05-26 at 10.57.19 PM.jpeg",
+                category: "hackathons"
+            },
+            {
+                id: 104,
+                title: "Hackathon Moment 4",
+                description: "Project presentation.",
+                image: "images/hackathon/WhatsApp Image 2025-05-26 at 10.57.22 PM.jpeg",
+                category: "hackathons"
+            },
+            {
+                id: 105,
+                title: "Hackathon Moment 5",
+                description: "Presenting creativity.",
+                image: "images/hackathon/WhatsApp Image 2025-05-26 at 10.57.23 PM.jpeg",
+                category: "hackathons"
+            },
+            {
+                id: 106,
+                title: "Hackathon Moment 6",
+                description: "Team brainstorming.",
+                image: "images/hackathon/WhatsApp Image 2025-05-26 at 10.57.17 PM (1).jpeg",
+                category: "hackathons"
+            },
+            {
+                id: 107,
+                title: "Hackathon Moment 7",
+                description: "Collaboration at its best.",
+                image: "images/hackathon/WhatsApp Image 2025-05-26 at 10.57.17 PM.jpeg",
+                category: "hackathons"
+            },
+            {
+                id: 108,
+                title: "Hackathon Moment 8",
+                description: "Celebrating success.",
+                image: "images/hackathon/WhatsApp Image 2025-05-20 at 12.58.05 AM.jpeg",
+                category: "hackathons"
+            },
+,
+            
+        ];
+
+        // Initialize gallery
+        function initializeGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalClose = document.querySelector('.modal-close');
+
+            // Load gallery items
+            function loadGalleryItems(category = 'all') {
+                galleryGrid.innerHTML = '';
+                const filteredData = category === 'all' 
+                    ? galleryData 
+                    : galleryData.filter(item => item.category === category);
+
+                if (filteredData.length === 0) {
+                    // Show the Code Buster Coding Club logo as a placeholder
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <img src="images/WhatsApp Image 2025-05-27 at 1.28.02 AM.jpeg">
+                        <div class="gallery-caption">
+                            <h3>Code Buster Coding Club</h3>
+                            <p>"Ideas + Code = Innovation"</p>
+                        </div>
+                    `;
+                    galleryGrid.appendChild(galleryItem);
+                    return;
+                }
+
+                filteredData.forEach(item => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="gallery-caption">
+                            <h3>${item.title}</h3>
+                            <p>${item.description}</p>
+                        </div>
+                    `;
+
+                    galleryItem.addEventListener('click', () => {
+                        modalImage.src = item.image;
+                        modalTitle.textContent = item.title;
+                        modalDescription.textContent = item.description;
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    });
+
+                    galleryGrid.appendChild(galleryItem);
+                });
+            }
+
+            // Filter button click handlers
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    loadGalleryItems(button.dataset.filter);
+                });
+            });
+
+            // Modal close handlers
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Initial load
+            loadGalleryItems();
+        }
+
+        // Initialize auth UI
+        function updateAuthUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+            } else {
+                loginBtn.style.display = 'inline-block';
+                registerBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+            }
+        }
+
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('memberEmail');
+            window.location.href = 'index123.html';
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAuthUI();
+            initializeGallery();
+        });
+    </script>
+</body>
+</html> 
