@@ -3,35 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Join our college hackathon to innovate, collaborate, and create impactful solutions. No team? No problem. Be a part of the tech revolution!" />
+    <meta name="keywords" content="Hackathon, College Event, Innovation, Tech, Team, Coding, Students" />
+    <meta name="author" content="Your Name or Team Name" />
   
-    
-      <
-      <meta name="description" content="Join our college hackathon to innovate, collaborate, and create impactful solutions. No team? No problem. Be a part of the tech revolution!" />
-      <meta name="keywords" content="Hackathon, College Event, Innovation, Tech, Team, Coding, Students" />
-      <meta name="author" content="Your Name or Team Name" />
-    
-      <!-- Open Graph (for social sharing) -->
-      <meta property="og:title" content="Join the Ultimate Hackathon Experience!" />
-      <meta property="og:description" content="Show your skills. Build your team. Win big." />
-      <meta property="og:image" content="https://cbncc.netlify.app/og-image.png" />
-      <meta property="og:url" content="https://cbncc.netlify.app/" />
-      <meta property="og:type" content="website" />
-    
-      <!-- Favicon -->
-      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    
-      <!-- Optional: Add fonts or stylesheets -->
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-    </head>
-    <title>_CBNCC_ - Coding Club</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Open Graph (for social sharing) -->
+    <meta property="og:title" content="Join the Ultimate Hackathon Experience!" />
+    <meta property="og:description" content="Show your skills. Build your team. Win big." />
+    <meta property="og:image" content="https://cbncc.netlify.app/og-image.png" />
+    <meta property="og:url" content="https://cbncc.netlify.app/" />
+    <meta property="og:type" content="website" />
+  
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  
+    <!-- Fonts and stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <title>_CBNCC_ - Coding Club</title>
+    <style>
+        /* WhatsApp Section Styles */
+        .whatsapp-section {
+            padding: 80px 10%;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        /* ... rest of your existing style content ... */
+    </style>
   </head>
+  <!-- Rest of your body content remains the same --><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Join our college hackathon to innovate, collaborate, and create impactful solutions. No team? No problem. Be a part of the tech revolution!" />
+    <meta name="keywords" content="Hackathon, College Event, Innovation, Tech, Team, Coding, Students" />
+    <meta name="author" content="Your Name or Team Name" />
+  
+    <!-- Open Graph (for social sharing) -->
+    <meta property="og:title" content="Join the Ultimate Hackathon Experience!" />
+    <meta property="og:description" content="Show your skills. Build your team. Win big." />
+    <meta property="og:image" content="https://cbncc.netlify.app/og-image.png" />
+    <meta property="og:url" content="https://cbncc.netlify.app/" />
+    <meta property="og:type" content="website" />
+  
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  
+    <!-- Fonts and stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>_CBNCC_ - Coding Club</title>
+    <style>
+        /* WhatsApp Section Styles */
+        .whatsapp-section {
+            padding: 80px 10%;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        /* ... rest of your existing style content ... */
+    </style>
+  </head>
+  <!-- Rest of your body content remains the same -->
     <style>
         /* WhatsApp Section Styles */
         .whatsapp-section {
@@ -306,6 +349,149 @@
                 height: 150px;
             }
         }
+            /* Hackathon Popup Styles */
+            .hackathon-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: fadeInUp 0.5s ease-out;
+            display: none;
+        }
+
+        .popup-card {
+            width: 220px;
+            height: 300px;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .popup-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            transform: rotateY(0deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .popup-card:hover .popup-content {
+            transform: rotateY(180deg);
+        }
+
+        .popup-front, .popup-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .popup-front {
+            background: #fff;
+        }
+
+        .popup-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popup-back {
+            background: linear-gradient(135deg, #151515 0%, #2a2a2a 100%);
+            color: rgb(223, 26, 26);
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .popup-back h3 {
+            font-size: 1.3rem;
+            margin: 0;
+            background: linear-gradient(to right, #25D366, #128C7E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .popup-back p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .register-btn {
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            margin-top: 10px;
+        }
+
+        .register-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .popup-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hackathon-popup {
+                bottom: 15px;
+                right: 15px;
+                left: 15px;
+                display: flex;
+                justify-content: flex-end;
+            }
+            
+            .popup-card {
+                width: 180px;
+                height: 250px;
+            }
+        }
     </style>
   
   <body>
@@ -324,6 +510,14 @@
     <header>
       <div><strong class="logo-text">CBNCC</strong></div>
       <nav>
+        <a href="achievements.html">Gallery</a>
+        <a href="write-blog.html">Write Blog</a>
+        <a href="competitions.html">Competitions</a>
+      </nav>
+      <button class="mobile-menu-btn" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="mobile-menu">
         <a href="achievements.html">Gallery</a>
         <a href="write-blog.html">Write Blog</a>
         <a href="competitions.html">Competitions</a>
@@ -354,6 +548,8 @@
         
       </div>
     </section>
+
+  
 
     <section class="integration-section">
       <div class="container">
@@ -864,6 +1060,26 @@
             </div>
         </div>
     </section>
+      <!-- HACK8ON Hackathon Popup -->
+      <div id="hackathonPopup" class="hackathon-popup">
+        <div class="popup-card">
+          <button class="popup-close" onclick="closePopup()" aria-label="Close popup"></button>
+          <div class="popup-content">
+            <div class="popup-front">
+              <img src="images/hacathon poster.jpeg" alt="HACK8ON 2025 Event Poster">
+            </div>
+            <div class="popup-back">
+              <h3>HACK8ON 2025</h3>
+              <p>26th July, 10:30am–6:30pm<br>NSU Campus</p>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcxKSmEkWN9DdpYpntRAvV0OJ2KOTaCLk4cBgX8598UpAo2Q/viewform" 
+                 target="_blank" class="register-btn">
+                Register Now
+                
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <footer>
       <div class="footer-content">
@@ -951,5 +1167,44 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.querySelector('.mobile-menu-btn');
+  const menu = document.querySelector('.mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+  }
+});
+
+  // Show popup after 5 seconds
+  setTimeout(() => {
+        document.getElementById('hackathonPopup').style.display = 'block';
+      }, 2000);
+
+      function closePopup() {
+        document.getElementById('hackathonPopup').style.display = 'none';
+      }
+
+      // Close when clicking outside (optional)
+      document.addEventListener('click', (e) => {
+        const popup = document.getElementById('hackathonPopup');
+        if (popup && !popup.contains(e.target)) {
+          popup.style.display = 'none';
+        }
+      });
+
+      // Mobile menu toggle (existing functionality)
+      document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.querySelector('.mobile-menu-btn');
+        const menu = document.querySelector('.mobile-menu');
+        if (btn && menu) {
+          btn.addEventListener('click', () => {
+            menu.classList.toggle('active');
+          });
+        }
+      });
+</script>
   </body>
-</html>
+ 
