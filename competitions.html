@@ -327,14 +327,14 @@
     <header>
         <div><strong class="logo-text">CBNCC</strong></div>
         <nav>
-            <a href="index123.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="achievements.html">Gallery</a>
             <a href="write-blog.html">Write Blog</a>
             <a href="competitions.html" class="active">Competitions</a>
-            <a href="#" id="loginBtn">Login</a>
-            <a href="#" id="registerBtn">Register</a>
-            <a href="profile.html" id="profileBtn" style="display: none;">My Profile</a>
-            <a href="#" id="logoutBtn" style="display: none;">Logout</a>
+            
+          
+            
+            
         </nav>
     </header>
 
@@ -366,45 +366,50 @@
         </div>
 
         <div class="competitions-grid">
-            <!-- Upcoming Hackathon -->
-            <article class="competition-card">
-                <div class="competition-image" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <!-- HACK8ON 2025 Hackathon -->
+            <article class="competition-card" data-category="hackathon">
+                <div class="competition-image" style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1350&q=80');">
                     <span class="competition-status status-upcoming">Upcoming</span>
                 </div>
                 <div class="competition-content">
                     <div class="competition-date">
                         <i class="far fa-calendar"></i>
-                        COMING SOON
+                        26th July 2025 (Saturday), 10:30 a.m to 6:30 p.m
                     </div>
-                    <h3 class="competition-title">CBNCC Annual Hackathon 2024</h3>
-                    <p class="competition-description">A 24-hour hackathon where students will build innovative solutions for real-world problems using cutting-edge technologies.</p>
+                    <h3 class="competition-title">HACK8ON 2025</h3>
+                    <p class="competition-description">
+                        8-hour offline hackathon at NSU Campus.<br>
+                        <strong>Team Size:</strong> 1–3<br>
+                        <strong>Themes:</strong> Open Innovation, AI/ML, Ed-Tech, Healthcare, Cybersecurity<br>
+                        <strong>Prizes:</strong> Certificates for all, cash prizes for top 2 teams.<br>
+                        <strong>Fee:</strong> ₹199 per team
+                    </p>
                     <div class="competition-details">
                         <div class="detail-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Netaji Subhash University</span>
+                            <i class="fas fa-users"></i>
+                            <span>1–3 Members</span>
                         </div>
                         <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>Team of 2-4</span>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>NSU Campus</span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-trophy"></i>
-                            <span>₹50,000 Prize Pool</span>
+                            <span>Certificates & Cash Prizes</span>
                         </div>
                     </div>
                     <div class="competition-tags">
-                        <span class="tag">Web Development</span>
+                        <span class="tag">Hackathon</span>
                         <span class="tag">AI/ML</span>
-                        <span class="tag">Mobile Apps</span>
+                        <span class="tag">Ed-Tech</span>
+                        <span class="tag">Healthcare</span>
+                        <span class="tag">Cybersecurity</span>
+                        <span class="tag">Open Innovation</span>
                     </div>
                     <div class="competition-actions">
-                        <a href="#" class="action-button primary-button">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcxKSmEkWN9DdpYpntRAvV0OJ2KOTaCLk4cBgX8598UpAo2Q/viewform?usp=dialog" class="action-button primary-button" target="_blank">
                             <i class="fas fa-sign-in-alt"></i>
                             Register Now
-                        </a>
-                        <a href="#" class="action-button secondary-button">
-                            <i class="fas fa-info-circle"></i>
-                            Learn More
                         </a>
                     </div>
                 </div>
@@ -574,6 +579,13 @@
             });
         });
 
+        const events = [
+            {
+            date:"2025-07-26",
+            title:"HACK80N"
+        }
+    ];
+
         // Calendar functionality
         function generateCalendar() {
             const calendarGrid = document.getElementById('calendarGrid');
@@ -612,8 +624,17 @@
                 dayElement.textContent = day;
                 
                 // Add has-event class to days with events (example: 15th and 20th)
-                if (day === 15 || day === 20) {
+                if (day === 26) {
                     dayElement.classList.add('has-event');
+
+                    if (day === 26) {
+      // Add "HACK8ON Hackathon" label only for 26th
+      const label = document.createElement('div');
+      label.className = 'event-title';
+      label.textContent = 'HACK8ON Hackathon';
+      dayElement.appendChild(label);
+    }
+  
                 }
                 
                 calendarGrid.appendChild(dayElement);
