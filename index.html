@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   
     
-      <
+      
       <meta name="description" content="Join our college hackathon to innovate, collaborate, and create impactful solutions. No team? No problem. Be a part of the tech revolution!" />
       <meta name="keywords" content="Hackathon, College Event, Innovation, Tech, Team, Coding, Students" />
       <meta name="author" content="Your Name or Team Name" />
@@ -306,6 +306,74 @@
                 height: 150px;
             }
         }
+        .hackathon-modal {
+      position: relative;
+      z-index: 99999;
+      left: 0;
+      right: 0;
+      bottom: 4px;
+      top: auto;
+      width: 100%;
+      height: auto;
+      background: none;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      pointer-events: none;
+      animation: fadeIn 0.5s;
+      box-sizing: border-box;
+    }
+    .hackathon-modal-content {
+      max-width: 340px;
+      min-width: 220px;
+      margin: 0 auto 16px auto;
+      box-sizing: border-box;
+      pointer-events: auto;
+      max-width: 370px;
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      overflow: hidden;
+      background: #fff;
+      margin-bottom: 0;
+      animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .hackathon-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 1.7rem;
+      color: #888;
+      cursor: pointer;
+      z-index: 2;
+      transition: color 0.2s;
+    }
+    .hackathon-modal-close:hover {
+      color: #128C7E;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 600px) {
+      .hackathon-modal {
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 0 0 10px 0;
+      }
+      .hackathon-modal-content {
+        max-width: 98vw;
+        margin: 0 auto 0 auto;
+      }
+    }
     </style>
   
   <body>
@@ -384,8 +452,8 @@
               <p>Workshop Hours</p>
             </div>
             <div class="stat-box">
-              <h3><span>20+</span></h3>
-              <p>Core members </p>
+              <h3><span>24/7</span></h3>
+              <p>Community Support</p>
             </div>
           </div>
         </div>
@@ -883,9 +951,9 @@
           </p>
           <div class="social-links">
             <a href="#" class="social-link"><span>𝕏</span></a>
-            <a href="#" class="social-link"><span>in</span></a>
-            <a href="#" class="social-link"><span>f</span></a>
-            <a href="https://github.com/account" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/cbncc-code-buster-and-coding-club-09b264352/" class="social-link"><span>in</span></a>
+            <a href="https://www.instagram.com/_cbncc_?igsh=bnF3ODRtaGRiOTY=" class="social-link"><span>f</span></a>
+            <a href="https://github.com/cbncc" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
           </div>
         </div>
         <div>
@@ -904,15 +972,15 @@
             <a href="#">Learning Paths</a>
             <a href="#">Workshops</a>
             <a href="#">Documentation</a>
-            <a href="#">GitHub Repos</a>
+            <a href="https://github.com/cbncc">GitHub Repos</a>
             <a href="#">Code Labs</a>
           </div>
         </div>
         <div>
           <h4>Contact</h4>
           <div class="footer-links">
-            <a href="#">Join Discord</a>
-            <a href="#">Email Us</a>
+            <a href="https://discord.gg/95D66u9v">Join Discord</a>
+            <a href="cbncc.club@nsuniv.ac.in">Email Us</a>
             <a href="#">Report Issue</a>
             <a href="#">Feedback</a>
             <a href="#">Support</a>
@@ -920,7 +988,7 @@
         </div>
       </div>
       <div class="copyright">
-        © 2024 CBNCC. All rights reserved. Made with ❤️ by students, for students.
+        © 2025 CBNCC. All rights reserved. DESIGNED BY UTKARSH KUMAR 
       </div>
     </footer>
 
@@ -970,93 +1038,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 </script>
+  
+ 
   </body>
-  <!-- HACK8ON Hackathon Popup Modal -->
-  <div id="hackathonModal" style="position:fixed;right:32px;left:auto;bottom:32px;z-index:99999;display:flex;justify-content:flex-end;align-items:flex-end;">
-    <div class="card" style="overflow:visible;width:190px;height:254px;">
-      <div class="content" style="width:100%;height:100%;transform-style:preserve-3d;transition:transform 300ms;box-shadow:0px 0px 10px 1px #000000ee;border-radius:5px;">
-        <div class="back" style="background-color:#151515;position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:5px;overflow:hidden;justify-content:center;display:flex;align-items:center;">
-          <div class="back-content" style="position:absolute;width:99%;height:99%;background-color:#151515;border-radius:5px;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;">
-            <a href='https://docs.google.com/forms/d/e/1FAIpQLSdcxKSmEkWN9DdpYpntRAvV0OJ2KOTaCLk4cBgX8598UpAo2Q/viewform?usp=dialog' target='_blank' style='background:#128C7E;color:#fff;padding:10px 22px;border-radius:8px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px #128C7E44;'>Register Now</a>
-            <div style='font-size:12px;text-align:center;'>HACK8ON 2025<br>26th July, 10:30am–6:30pm<br>NSU Campus</div>
-          </div>
-        </div>
-        <div class="front" style="position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:5px;overflow:hidden;">
-          <img src="images/hacathon poster.jpeg" alt="HACK8ON Poster" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    .hackathon-modal {
-      position: fixed;
-      z-index: 99999;
-      left: 0;
-      right: 0;
-      bottom: 24px;
-      top: auto;
-      width: 100%;
-      height: auto;
-      background: none;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      pointer-events: none;
-      animation: fadeIn 0.5s;
-      box-sizing: border-box;
-    }
-    .hackathon-modal-content {
-      max-width: 340px;
-      min-width: 220px;
-      margin: 0 auto 16px auto;
-      box-sizing: border-box;
-      pointer-events: auto;
-      max-width: 370px;
-      width: 100%;
-      border-radius: 18px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
-      overflow: hidden;
-      background: #fff;
-      margin-bottom: 0;
-      animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
-    }
-    .hackathon-modal-close {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 1.7rem;
-      color: #888;
-      cursor: pointer;
-      z-index: 2;
-      transition: color 0.2s;
-    }
-    .hackathon-modal-close:hover {
-      color: #128C7E;
-    }
-    @keyframes popIn {
-      0% { transform: scale(0.7); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @media (max-width: 600px) {
-      .hackathon-modal {
-        right: 0;
-        left: 0;
-        bottom: 0;
-        width: 100vw;
-        justify-content: center;
-        align-items: flex-end;
-        padding: 0 0 10px 0;
-      }
-      .hackathon-modal-content {
-        max-width: 98vw;
-        margin: 0 auto 0 auto;
-      }
-    }
+  
+    
   </style>
 
   <!-- No script needed for popup visibility during testing -->
