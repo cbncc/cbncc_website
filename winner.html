@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hack8on Champions | CBNCC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f0f1a;
+            --secondary: #4361ee;
+            --accent: #f72585;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+            --light: #f8f9fa;
+            --dark: #050505;
+            --neon-blue: #00f5ff;
+            --neon-pink: #ff00ff;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;800&family=Space+Grotesk:wght@500;700&family=Orbitron:wght@500;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(67, 97, 238, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(247, 37, 133, 0.15) 0%, transparent 25%);
+            perspective: 1000px;
+        }
+
+        .winner-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 3rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Cinematic Scrolling Effect */
+        .scroll-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(15, 15, 26, 0.9) 0%, 
+                rgba(15, 15, 26, 0.7) 50%, 
+                rgba(15, 15, 26, 0.9) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header Section */
+        .winner-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+
+        .winner-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .winner-badge {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(145deg, rgba(255,215,0,0.2), rgba(255,215,0,0.05));
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            position: relative;
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 80px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .winner-badge i {
+            font-size: 5rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        .winner-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5.5rem;
+            letter-spacing: 5px;
+            margin: 1rem 0;
+            background: linear-gradient(to right, var(--gold), #ffffff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            animation: titleGlow 3s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            }
+        }
+
+        .winner-team {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 1rem 0 2rem;
+            color: white;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .winner-team::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+
+        .winner-project {
+            font-size: 1.6rem;
+            color: var(--light);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            position: relative;
+            padding-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .winner-project::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            margin: 2rem auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(67, 97, 238, 0.5);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            text-align: center;
+            margin: 7rem 0 5rem;
+            position: relative;
+            text-transform: uppercase;
+            color: transparent;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            margin: 1.5rem auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+        }
+
+        /* Team Members - Asymmetric Layout */
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin: 6rem 0;
+            position: relative;
+        }
+
+        /* Developer Card (Left-aligned) */
+        .developer-card {
+            background: linear-gradient(145deg, rgba(67, 97, 238, 0.1), rgba(15, 15, 26, 0.7));
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 2.5rem;
+            border-left: 6px solid var(--secondary);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: rotate(-3deg) translateY(50px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+
+        .designer-card {
+            background: linear-gradient(145deg, rgba(247, 37, 133, 0.1), rgba(15, 15, 26, 0.7));
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 2.5rem;
+            border-left: 6px solid var(--accent);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: rotate(2deg) translateY(80px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.6s;
+        }
+
+        .devops-card {
+            background: linear-gradient(145deg, rgba(0, 245, 255, 0.1), rgba(15, 15, 26, 0.7));
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 2.5rem;
+            border-left: 6px solid var(--neon-blue);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: rotate(-1deg) translateY(100px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: rotate(0) translateY(0);
+            }
+        }
+
+        .developer-card::before,
+        .designer-card::before,
+        .devops-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.03)">&lt;code&gt;</text></svg>');
+            opacity: 0.5;
+        }
+
+        .developer-card:hover,
+        .designer-card:hover,
+        .devops-card:hover {
+            transform: translateY(-20px) !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .developer-card:hover {
+            box-shadow: 0 25px 60px rgba(67, 97, 238, 0.6);
+        }
+
+        .designer-card:hover {
+            box-shadow: 0 25px 60px rgba(247, 37, 133, 0.6);
+        }
+
+        .devops-card:hover {
+            box-shadow: 0 25px 60px rgba(0, 245, 255, 0.6);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .member-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .developer-card .member-photo {
+            border-color: var(--secondary);
+        }
+
+        .designer-card .member-photo {
+            border-color: var(--accent);
+        }
+
+        .devops-card .member-photo {
+            border-color: var(--neon-blue);
+        }
+
+        .member-info {
+            margin-left: 1.5rem;
+        }
+
+        .member-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: white;
+        }
+
+        .member-role {
+            font-size: 1.1rem;
+            color: var(--light);
+            opacity: 0.8;
+            position: relative;
+            display: inline-block;
+        }
+
+        .developer-card .member-role::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .designer-card .member-role::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .devops-card .member-role::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-blue);
+        }
+
+        .member-bio {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .member-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Runners Up Section */
+        .runners-up {
+            margin: 8rem 0;
+            position: relative;
+        }
+
+        .runners-up::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .runner-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .runner-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(15, 15, 26, 0.8));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .runner-card.first {
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+
+        .runner-card.second {
+            animation: fadeInUp 1s forwards 0.6s;
+        }
+
+        .runner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--silver), var(--bronze));
+        }
+
+        .runner-card.first::before {
+            background: var(--silver);
+            box-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
+        }
+
+        .runner-card.second::before {
+            background: var(--bronze);
+            box-shadow: 0 0 20px rgba(205, 127, 50, 0.5);
+        }
+
+        .runner-medal {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 3rem;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .first .runner-medal {
+            color: var(--silver);
+            animation: medalFloat 3s infinite ease-in-out;
+        }
+
+        .second .runner-medal {
+            color: var(--bronze);
+            animation: medalFloat 3s infinite ease-in-out 0.5s;
+        }
+
+        @keyframes medalFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .runner-team {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: white;
+        }
+
+        .runner-project {
+            font-size: 1.3rem;
+            color: var(--light);
+            margin-bottom: 2rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .runner-desc {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        /* Leaderboard Section */
+        .leaderboard {
+            margin: 8rem 0;
+            width: 100%;
+            position: relative;
+        }
+
+        .leaderboard::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0 1.5rem;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+
+        .leaderboard-table th {
+            text-align: left;
+            padding: 1.5rem 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1rem;
+            color: var(--light);
+            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .leaderboard-table th:first-child {
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+
+        .leaderboard-table th:last-child {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .leaderboard-table td {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            vertical-align: middle;
+        }
+
+        .leaderboard-table tr:hover td {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .rank {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            width: 70px;
+            text-align: center;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .leaderboard-table tr:nth-child(2) .rank {
+            color: var(--silver);
+            text-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+        }
+
+        .leaderboard-table tr:nth-child(3) .rank {
+            color: var(--bronze);
+            text-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
+        }
+
+        .team-name {
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-project {
+            font-size: 1.1rem;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+       
+
+        /* Cinematic Footer */
+        .cinematic-footer {
+            width: 100%;
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+            position: relative;
+            margin-top: 5rem;
+        }
+
+        .cinematic-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        .footer-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+        }
+
+        .footer-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: white;
+            margin-top: 3rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .winner-title {
+                font-size: 4.5rem;
+            }
+            
+            .winner-team {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .winner-title {
+                font-size: 3.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .winner-team {
+                font-size: 2.2rem;
+            }
+            
+            .winner-project {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .team-members,
+            .runner-cards {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .developer-card,
+            .designer-card,
+            .devops-card,
+            .runner-card {
+                transform: none !important;
+                animation: none !important;
+                opacity: 1 !important;
+            }
+            
+            .developer-card:hover,
+            .designer-card:hover,
+            .devops-card:hover {
+                transform: translateY(-10px) !important;
+            }
+            
+            .winner-badge {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .winner-badge i {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .winner-title {
+                font-size: 2.8rem;
+            }
+            
+            .winner-team {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .member-name {
+                font-size: 1.5rem;
+            }
+            
+            .runner-team {
+                font-size: 1.8rem;
+            }
+            
+            .runner-project {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-effect"></div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="winner-container">
+        <div class="winner-header">
+            <div class="winner-badge">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h1 class="winner-title">Hack8on Champions</h1>
+            <div class="winner-team">CODE CRUSHERS</div>
+            <div class="winner-project"></div>
+        </div>
+        
+        <!-- Champion Team Members -->
+        <h2 class="section-title">The Winning Team</h2>
+        <div class="team-members">
+            <div class="developer-card">
+                <div class="member-header">
+                   
+                    <div class="member-info">
+                        <div class="member-name">Ganesh Kumar</div>
+                        <div class="member-role">Lead Developer</div>
+                    </div>
+                </div>
+                <div class="member-bio">
+                    
+                </div>
+                <div class="member-social">
+                    
+                </div>
+            </div>
+            
+            <div class="designer-card">
+                <div class="member-header">
+                    
+                    <div class="member-info">
+                        <div class="member-name">Ishan Kumar</div>
+                        <div class="member-role"></div>
+                    </div>
+                </div>
+                <div class="member-bio">
+                   
+                </div>
+                <div class="member-social">
+                   
+                </div>
+            </div>
+            
+            <div class="devops-card">
+                <div class="member-header">
+                   
+                    <div class="member-info">
+                        <div class="member-name">Kunal Kumar</div>
+                        <div class="member-role"></div>
+                    </div>
+                </div>
+                <div class="member-bio">
+                   
+                </div>
+                <div class="member-social">
+                  
+                </div>
+            </div>
+        </div>
+
+        <!-- Runners Up Section -->
+        <h2 class="section-title">Runners Up</h2>
+        <div class="runners-up">
+            <div class="runner-cards">
+                <div class="runner-card first">
+                    <div class="runner-medal">🥈</div>
+                    <div class="runner-team">CARE CIRCUIT</div>
+                    <div class="runner-project"></div>
+                    <div class="runner-desc">
+                       
+                    </div>
+                </div>
+                
+               
+        </div>
+
+        <!-- Leaderboard Section -->
+        <h2 class="section-title">Final Leaderboard</h2>
+        <div class="leaderboard">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Team</th>
+                        <th>Project-PPT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank">1</td>
+                        <td>
+                            <div class="team-name">CODE PHINIX </div>
+                            <div class="team-project">Campus Link</div>
+                        </td>
+                        <td>
+                            <a href="https://drive.google.com/file/d/1VBoslt9ME5v5FnTtZc28alybjlOqAbQq/view" target="_blank"  style="color: white;">VIEW PPT</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rank">2</td>
+                        <td>
+                            <div class="team-name">GEEKY MINDS</div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="" target="_blank"  style="color: white;">VIEW PPT</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank">3</td>
+                        <td>
+                            <div class="team-name">THE GUERRILLAS</div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="https://docs.google.com/presentation/d/1cCpXMf6ZwWPLkNXmTXPMConUlszuQuH7/edit?usp=sharing&ouid=113060420004885086173&rtpof=true&sd=true" target="_blank"  style="color: white;">VIEW PPT</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank">4</td>
+                        <td>
+                            <div class="team-name">CODE BLOODED</div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="https://docs.google.com/presentation/d/1OWqkgVSan5kYTet6M6ImpwBfB82lvfN-/edit?usp=sharing&ouid=113060420004885086173&rtpof=true&sd=true" target="_blank"  style="color: white;">VIEW PPT</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank">5</td>
+                        <td>
+                            <div class="team-name">SYNTAX SYNDICATE</div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="" target="_blank"  style="color: white;">VIEW PPT</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank">6</td>
+                        <td>
+                            <div class="team-name">CIPHER NEST </div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="" target="_blank"  style="color: white;">VIEW PPT</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank">7</td>
+                        <td>
+                            <div class="team-name">ZYNAPSE & CODERSTAAN</div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="https://docs.google.com/presentation/d/1l8A15IJsa458fF0Bbdfx8axkDgJGuKR3/edit?usp=sharing&ouid=113060420004885086173&rtpof=true&sd=true" target="_blank"  style="color: white;">VIEW PPT</a>
+                        
+                            <a href="https://drive.google.com/file/d/1co1Oouc_Z4yztzTJfwnbmmCrgYWloIAE/view?usp=sharing" target="_blank"  style="color: white;">VIEW PPT</a>
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rank">8</td>
+                        <td>
+                            <div class="team-name">TROJAN HORSE </div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="https://docs.google.com/presentation/d/12ZKX5_eWblUQpSXvdmucAGNrk6ubpQ9d/edit?usp=sharing&ouid=113060420004885086173&rtpof=true&sd=true" target="_blank"  style="color: white;">VIEW PPT</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank">9</td>
+                        <td>
+                            <div class="team-name">INFINITE LOOPERS & INNOVADERS </div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="https://docs.google.com/presentation/d/1zCwFALH7OJmUKfLuB70u944yy7zTAyhz/edit?usp=sharing&ouid=113060420004885086173&rtpof=true&sd=true" target="_blank"  style="color: white;">VIEW PPT</a>
+                        
+                            <a href="https://docs.google.com/presentation/d/1xw7Xdjf_OucB8Tn4Zadn2p5687fGcj3y/edit?usp=sharing&ouid=113060420004885086173&rtpof=true&sd=true" target="_blank"  style="color: white;">VIEW PPT</a>
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rank">10</td>
+                        <td>
+                            <div class="team-name">S3D</div>
+                            <div class="team-project"></div>
+                        </td>
+                        <td> <a href="https://docs.google.com/presentation/d/1SvYSP-rQFwDtvF49YnNzKgPt3dlQe5v8/edit?usp=sharing&ouid=113060420004885086173&rtpof=true&sd=true" target="_blank"  style="color: white;">VIEW PPT</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="cinematic-footer">
+        <h3 class="footer-title">See You At The Next Hackathon</h3>
+        <p class="footer-text">
+            The Hack8on competition showcased groundbreaking innovation in developer tools and collaboration technologies. 
+            Join us next year for another exciting challenge where creativity meets technology.
+        </p>
+        <div class="footer-logo">CBNCC</div>
+    </div>
+
+    <script>
+        // Create confetti elements
+      
+        
+      
+        
+        // Parallax effect for team cards
+        const cards = document.querySelectorAll('.developer-card, .designer-card, .devops-card');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            
+            cards.forEach((card, index) => {
+                // Different intensity based on card position
+                const intensity = index === 1 ? 1.5 : 1; // Designer card moves more
+                card.style.transform = `
+                    rotate3d(${yAxis * 0.1}, ${xAxis * 0.1}, 0, ${(index % 2 === 0 ? -1 : 1) * xAxis * 0.5 * intensity}deg) 
+                    translateY(${-yAxis * 0.5 * intensity}px)
+                `;
+            });
+        });
+        
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.runner-card, .leaderboard-table').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
