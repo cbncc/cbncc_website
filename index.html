@@ -374,6 +374,52 @@
         margin: 0 auto 0 auto;
       }
     }
+
+
+    /* Desktop defaults */
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.mobile-menu-btn {
+  display: none; /* hide hamburger on desktop */
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  position: absolute;
+  top: 60px; /* adjust depending on header height */
+  right: 10px;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.mobile-menu.active {
+  display: flex;
+}
+
+/* Show hamburger + mobile menu only on small screens */
+@media (max-width: 768px) {
+  header nav { /* main nav */
+    display: none; /* hide desktop links */
+  }
+  .mobile-menu-btn {
+    display: block; /* show hamburger */
+  }
+}
+
+.logo-text {
+  text-decoration: none;
+  color: inherit;  /* keeps your current text color */
+  font-weight: bold;
+  font-size: 1.5rem; /* adjust as needed */
+}
+
+
     </style>
   
   <body>
@@ -390,7 +436,10 @@
     <div class="toast-container"></div>
 
     <header>
-      <div><strong class="logo-text">CBNCC</strong></div>
+      <div>
+        <a href="index.html" class="logo-text"><strong>CBNCC</strong></a>
+      </div>
+      
       <nav>
         <a href="achievements.html">Gallery</a>
      
@@ -1038,6 +1087,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+  const menuBtn = document.querySelector(".mobile-menu-btn");
+  const mobileMenu = document.querySelector(".mobile-menu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+  });
+
+  // Optional: close when a link is clicked
+  document.querySelectorAll(".mobile-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+    });
+  });
+
+
 </script>
   
  

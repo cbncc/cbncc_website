@@ -319,13 +319,20 @@
                 font-size: 0.8rem;
             }
         }
+        .logo-text {
+  text-decoration: none;
+  color: inherit;  /* keeps your current text color */
+  font-weight: bold;
+  font-size: 1.5rem; /* adjust as needed */
+}
+
     </style>
 </head>
 <body>
     <div class="toast-container"></div>
 
     <header>
-        <div><strong class="logo-text">CBNCC</strong></div>
+        <a href="index.html" class="logo-text"><strong>CBNCC</strong></a>
         <nav>
             <a href="index.html">Home</a>
             <a href="achievements.html">Gallery</a>
@@ -369,7 +376,7 @@
             <!-- HACK8ON 2025 Hackathon -->
             <article class="competition-card" data-category="hackathon">
                 <div class="competition-image" style="background-image: url('images/hacathon\ poster.jpeg');">
-                    <span class="competition-status status-upcoming">Upcoming</span>
+                    <span class="competition-status status-upcoming">Finished</span>
                 </div>
                 <div class="competition-content">
                     <div class="competition-date">
@@ -462,7 +469,7 @@
             <!-- Past Event -->
             <article class="competition-card">
                 <div class="competition-image" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                    <span class="competition-status status-past">UPCOMING </span>
+                    <span class="competition-status status-past">Finished </span>
                 </div>
                 <div class="competition-content">
                     <div class="competition-date">
@@ -474,11 +481,11 @@
                     <div class="competition-details">
                         <div class="detail-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Room 302, CS Department</span>
+                            <span></span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-users"></i>
-                            <span>50 Participants</span>
+                            <span></span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-clock"></i>
