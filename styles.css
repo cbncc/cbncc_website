@@ -1034,6 +1034,7 @@ footer a:hover::before {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 20px;
 }
 
 .category-btn:hover,
@@ -3002,4 +3003,28 @@ header .logo-text::after {
     width: calc(100% - 40px);
     top: 60px;
   }
+}
+
+.blog-link1 {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  padding: 10px 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 90px;
+}
+
+.blog-excerpt1 {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  padding-right: 25px;
 }
